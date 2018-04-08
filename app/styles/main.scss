@@ -36,20 +36,49 @@ $header-height: 4.8rem;
   width: 100%;
   height: 100%;
   padding-top: $header-height;
-  overflow: auto;
+  overflow: hidden;
   position: absolute;
   left: 0;
   top: 0;
   z-index: 1;
+
+  .ui-content,
+  .ui-detail {
+    display: none;
+  }
+
+  &[data-state="list"] {
+    .ui-content {
+      display: block;
+    }
+
+    .header {
+      justify-content: flex-end;
+
+      .button--back {
+        display: none;
+      }
+    }
+  }
+
+  &[data-state="detail"] {
+    .ui-detail {
+      display: block;
+    }
+
+    .header {
+      justify-content: space-between;
+    }
+  }
 }
 
 .header {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: $header-height;
+  padding: 0 0.5em;
   background: map-get($colors, black);
   box-shadow: 0 2px 12px rgba(#212121, 0.7);
   position: fixed;
@@ -63,62 +92,143 @@ $header-height: 4.8rem;
     height: 36px;
     margin: 0;
     background: url('../images/logo@2x.png') 50% 50% / contain no-repeat;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .social {
+    margin: 0 0.4em;
+  }
+
+  .button--back {
+    animation: button-back-enter 0.4s ease-in-out 0.2s both;
+
+    @keyframes button-back-enter {
+      from {
+        transform: translateX(0.2em);
+        opacity: 0;
+      }
+    }
   }
 }
 
 p {
-  font: 300 1.3rem / 1.7 $font-body;
+  font: 300 1.5rem / 1.6 $font-body;
   color: map-get($colors, darkgray);
-  margin: 0.5em auto;
+  margin: 1em auto;
+
+  a {
+    color: inherit;
+  }
 }
 
-.content {
+.ui-content {
   flex: 1 1 100%;
   background: #F5F5F5;
   position: relative;
+  overflow: auto;
   z-index: 1;
 
-  .post {
-    min-height: 500px;
-    padding: 3.5em 2.5em 0;
-    overflow: hidden;
+  .post__excerpt {
+    animation: content-excerpt-enter 0.5s ease-in-out 0.3s both;
 
-    &.is-dark {
-      .post__title,
-      .post__date,
-      p {
-        color: rgba(#fff, 0.95);
-        text-shadow: 0 0 4px rgba(#212121, 0.5);
+    @keyframes content-excerpt-enter {
+      from {
+        transform: translateY(0.5em);
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.ui-detail {
+  flex: 1 0 100%;
+  padding: 3.5em 2.5em 1em;
+  background-color: #f8f9fa;
+  overflow: auto;
+
+  &.prev-black {
+    animation: detail-enter 0.4s ease-in-out both;
+
+    @keyframes detail-enter {
+      from { background-color: #545663; }
+    }
+
+    .post__date {
+      animation: post-date-enter 0.4s ease-in-out both;
+
+      @keyframes post-date-enter {
+        from { color: #545663; }
       }
     }
 
-    &--vast {
-      background:
-        url('../images/posts/vast-portrait.png') 50% 100% / 100% auto no-repeat,
-        radial-gradient(circle at 50% 90%, #545663, darken(#545663, 15%));
-    }
+    .post__title {
+      animation: post-title-enter 0.4s ease-in-out both;
 
-    &--helloworld {
-      background: url('../images/posts/helloworld-portrait.jpg') 50% 50% / cover no-repeat;
+      @keyframes post-title-enter {
+        from { color: #545663; }
+      }
     }
+  }
 
-    &__title {
-      font: 700 3.2rem / 1.3 $font-display;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: map-get($colors, darkgray);
-      margin: 0 auto 0.3em;
-    }
+  .post__detail {
+    animation: post-detail-enter 0.5s ease-in-out 0.3s both;
 
-    &__date {
-      font: 300 1.3rem / 0.8 $font-display;
-      color: map-get($colors, darkgray);
-      margin: 0 auto 0.2em;
+    @keyframes post-detail-enter {
+      from {
+        transform: translateY(0.5em);
+        opacity: 0;
+      }
     }
+  }
+}
 
-    &__excerpt {
-      margin: 0 auto 1em;
+.post {
+  min-height: 500px;
+  padding: 3.5em 2.5em 0;
+  overflow: hidden;
+
+  &.is-dark {
+    .post__title,
+    .post__date,
+    p {
+      color: rgba(#fff, 0.95);
+      text-shadow: 0 0 4px rgba(#212121, 0.5);
     }
+  }
+
+  &--vast {
+    background:
+      url('../images/posts/vast-portrait.png') 50% 100% / 100% auto no-repeat,
+      radial-gradient(circle at 50% 90%, #545663, darken(#545663, 15%));
+  }
+
+  &--helloworld {
+    background: url('../images/posts/helloworld-portrait.jpg') 50% 50% / cover no-repeat;
+  }
+
+  &__title {
+    font: 700 3.6rem / 1.2 $font-display;
+    text-transform: uppercase;
+    color: map-get($colors, darkgray);
+    margin: 0 auto 0.3em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__date {
+    font: 300 1.3rem / 0.8 $font-display;
+    color: map-get($colors, darkgray);
+    margin: 0 auto 0.2em;
   }
 }
 
@@ -140,5 +250,27 @@ p {
     .is-dark & {
       background-image: url('../images/arrow-right-white.png');
     }
+  }
+
+  &--back {
+    text-indent: -9999px;
+    width: 3.3rem;
+    height: 3.3rem;
+    background: url('../images/arrow-left-white.png') 50% 50% / 80% auto no-repeat;
+  }
+}
+
+.social {
+  display: inline-block;
+  text-indent: -9999px;
+  width: 3.3rem;
+  height: 3.3rem;
+
+  &--twitter {
+    background: url('../images/social-twitter.png') 50% 50% / 80% auto no-repeat;
+  }
+
+  &--instagram {
+    background: url('../images/social-instagram.png') 50% 50% / 68% auto no-repeat;
   }
 }

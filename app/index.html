@@ -17,13 +17,24 @@
     <!-- endbuild -->
   </head>
   <body>
-    <section class="app">
+    <section id="app" class="app" data-state="list">
       <header class="header">
-        <h1 class="header__logo">Sólo dos puntos</h1>
+        <button class="button button--back" data-control-back>Atrás</button>
+
+        <h1 class="header__logo">
+          <a href="index.html">Sólo dos puntos</a>
+        </h1>
+
+        <div class="header__social">
+          <a href="https://twitter.com/solodospuntos" target="_blank" class="social social--twitter">Twitter</a>
+          <a href="http://instagram.com/solodospuntos" target="_blank" class="social social--instagram">Instagram</a>
+        </div>
+
+        <!-- github ?-->
       </header>
 
-      <section class="content">
-        <article class="post post--vast is-dark">
+      <section class="ui-content">
+        <article class="post post--vast is-dark" data-post-link="vast">
           <p class="post__date">15/04/2018</p>
           <h2 class="post__title">Vast: The Crystal Caverns</h2>
 
@@ -31,12 +42,12 @@
             <p>
               El dragón lleva durmiendo muchos años. Durante ese tiempo, la cueva bajo la que ha descansado ha cambiado enormemente...
             </p>
-          </div>
 
-          <button class="button button--rarrow"></button>
+            <button class="button button--rarrow"></button>
+          </div>
         </article>
 
-        <article class="post post--helloworld is-dark">
+        <article class="post post--helloworld is-dark" data-post-link="helloworld">
           <p class="post__date">12/04/2018</p>
           <h2 class="post__title">Hello world</h2>
 
@@ -48,15 +59,34 @@
             <p>
               Porque toda historia tiene un comienzo...
             </p>
-          </div>
 
-          <button class="button button--rarrow"></button>
+            <button class="button button--rarrow"></button>
+          </div>
         </article>
       </section>
+
+      <article id="ui-detail" class="ui-detail prev-black">
+        <p class="post__date" data-flip-key="date">15/04/2018</p>
+
+        <h2 class="post__title" data-flip-key="title">
+          Vast: The Crystal Caverns
+        </h2>
+
+        <div class="post__detail">
+        </div>
+      </article>
     </section>
 
-    <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
+
+    <script src="https://unpkg.com/flipping@1.0.0/dist/flipping.web.js"></script>
+
+    <!-- build:js scripts/bundle.js -->
+    <script src="scripts/Data.js"></script>
+    <script src="scripts/modules/App.js"></script>
     <!-- endbuild -->
+
+    <script>
+      App.init();
+    </script>
   </body>
 </html>
