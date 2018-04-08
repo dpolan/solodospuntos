@@ -1,0 +1,14 @@
+.social {
+  display: inline-block;
+  text-indent: -9999px;
+  width: 3.3rem;
+  height: 3.3rem;
+
+  &--twitter {
+    background: url('../images/social-twitter.png') 50% 50% / 80% auto no-repeat;
+  }
+
+  &--instagram {
+    background: url('../images/social-instagram.png') 50% 50% / 68% auto no-repeat;
+  }
+}

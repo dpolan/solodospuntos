@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+p {
+  font: 300 1.5rem / 1.6 $font-body;
+  color: map-get($colors, darkgray);
+  margin: 1em auto;
+
+  a {
+    color: inherit;
+  }
+}

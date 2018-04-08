@@ -1,0 +1,41 @@
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 100%;
+  padding-top: $header-height;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  .ui-content,
+  .ui-detail {
+    display: none;
+  }
+
+  &[data-state="list"] {
+    .ui-content {
+      display: block;
+    }
+
+    .header {
+      justify-content: flex-end;
+
+      .button--back {
+        display: none;
+      }
+    }
+  }
+
+  &[data-state="detail"] {
+    .ui-detail {
+      display: block;
+    }
+
+    .header {
+      justify-content: space-between;
+    }
+  }
+}

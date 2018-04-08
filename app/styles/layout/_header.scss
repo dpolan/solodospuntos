@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+  height: $header-height;
+  padding: 0 0.5em;
+  background: map-get($colors, black);
+  box-shadow: 0 2px 12px rgba(#212121, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+
+  &__logo {
+    text-indent: -9999px;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    background: url('../images/logo@2x.png') 50% 50% / contain no-repeat;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .social {
+    margin: 0 0.4em;
+  }
+
+  .button--back {
+    animation: button-back-enter 0.4s ease-in-out 0.2s both;
+
+    @keyframes button-back-enter {
+      from {
+        transform: translateX(0.2em);
+        opacity: 0;
+      }
+    }
+  }
+}
