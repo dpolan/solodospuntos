@@ -5,24 +5,49 @@
   width: 100%;
   height: $header-height;
   padding: 0 0.5em;
-  background: map-get($colors, black);
-  box-shadow: 0 2px 12px rgba(#212121, 0.7);
+  background: linear-gradient(45deg, #63E2FF, #B066FE);
+  box-shadow: 0 0px 26px rgba(#000, 0.6);
+  animation: header-enter 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 2;
+
+  @keyframes header-enter {
+    0% {
+      transform: translate(0, -120%);
+    }
+  }
+
+  @media screen and (min-width: map-get($screens, sm)) {
+    width: auto;
+    height: 100%;
+    flex: 0 0 10rem;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 1.5em;
+    box-shadow: 0 0px 26px rgba(#000, 0.4);
+    position: relative;
+  }
 
   &__logo {
     text-indent: -9999px;
     width: 36px;
     height: 36px;
     margin: 0;
-    background: url('../images/logo@2x.png') 50% 50% / contain no-repeat;
+    background: url('../images/logo-white@2x.png') 50% 50% / contain no-repeat;
     transform: translate(-50%, -50%);
     position: absolute;
     left: 50%;
     top: 50%;
     z-index: 2;
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      transform: none;
+      position: relative;
+      left: 0;
+      top: 0;
+    }
 
     a {
       display: block;
@@ -33,16 +58,5 @@
 
   .social {
     margin: 0 0.4em;
-  }
-
-  .button--back {
-    animation: button-back-enter 0.4s ease-in-out 0.2s both;
-
-    @keyframes button-back-enter {
-      from {
-        transform: translateX(0.2em);
-        opacity: 0;
-      }
-    }
   }
 }

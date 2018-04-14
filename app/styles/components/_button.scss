@@ -15,7 +15,9 @@
     background: url('../images/arrow-right-black.png') 50% 50% / contain no-repeat;
 
     .is-dark & {
-      background-image: url('../images/arrow-right-white.png');
+      @media screen and (max-width: map-get($screens, sm)) {
+        background-image: url('../images/arrow-right-white.png');
+      }
     }
   }
 

@@ -4,7 +4,13 @@ $font-body: 'Roboto Slab', Helvetica, sans-serif;
 $colors: (
   black: #262525,
   darkgray: #333,
-  white: #333,
+  white: #fff,
+);
+
+$screens: (
+  sm: 540em / 16,
+  md: 768em / 16,
+  lg: 960em / 16,
 );
 
 $header-height: 4.8rem;

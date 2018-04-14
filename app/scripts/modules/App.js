@@ -1,4 +1,8 @@
 const App = (() => {
+  const CONFIG = {
+    endpoint: 'http://solodospuntos/wp-json/wp/v2/',
+  };
+
   const STATES = {
     list: {
       detail: 'detail',
@@ -8,6 +12,7 @@ const App = (() => {
     },
   };
 
+  let posts = [];
   let currentState = 'list';
 
   /**
@@ -21,46 +26,159 @@ const App = (() => {
     currentState = STATES[currentState][action];
     document.getElementById('app').dataset.state = currentState;
 
+    const event = new Event('statechange');
+    window.dispatchEvent(event);
+
     // Clear scroll between frames
     document.getElementById('ui-detail').scrollTop = 0;
 
     flipping.flip();
   };
 
+  const parseDate = date => moment(date).format('DD/MM/YYYY');
+
   /**
    * Searchs for the given post
-   * @param {string} slug Post string identifier
+   * @param {string}   slug     Post string identifier
+   * @param {function} callback Load callback
    */
-  const fetchPost = (slug) => {
+  const fetchPost = (slug, callback) => {
     let post = null;
 
-    for (let i = 0, l = POSTS.length; i < l; i += 1) {
-      if (POSTS[i].slug === slug) {
-        return POSTS[i];
+    for (let i = 0, l = posts.length; i < l; i += 1) {
+      if (posts[i].slug === slug) {
+        return callback(posts[i]);
       }
     }
-
-    return post;
   };
 
+  /**
+   * Store the post on the inner array
+   * @param {object} post Post data
+   */
+  const storePost = (post) => {
+    posts.push({
+      slug: post.slug,
+      date: post.date,
+      title: post.title.rendered,
+      content: post.content.rendered,
+    });
+  };
+
+  /**
+   * Configure tiny-sliders instances
+   */
+  const configureSliders = () => {
+    document.querySelectorAll('[data-slider]')
+      .forEach((element, index) => {
+        tns({
+          container: element,
+          items: 1,
+          mouseDrag: true,
+          slideBy: 'page',
+          swipeAngle: false,
+          speed: 400,
+          controls: false,
+          nav: false,
+        });
+      });
+  };
+
+  /**
+   * Configure links of the existing posts
+   */
+  const configureLinks = () => {
+    const posts = document.querySelectorAll('[data-post-link]');
+
+    posts.forEach((post) => {
+      const slug = post.dataset.postLink;
+
+      const title = post.querySelector('.post__title');
+      const arrow = post.querySelector('.button');
+
+      const handler = () => {
+        onClickPost(post, slug);
+      };
+
+      title.addEventListener('click', handler, false);
+      arrow.addEventListener('click', handler, false);
+    });
+  };
+
+  /**
+   * Handle post fetch action result
+   * @param {object} response Promise response
+   */
+  const onFetchPost = (response) => {
+    const wrapper = document.getElementById('ui-content');
+    emptyNode(wrapper);
+
+    // Populate
+    response.data.forEach((post) => {
+      storePost(post);
+
+      wrapper.innerHTML +=
+        `<article class="post post--${post.slug} is-dark" data-post-link="${post.slug}">
+          <p class="post__date">${parseDate(post.date)}</p>
+          <h2 class="post__title">${post.title.rendered}</h2>
+
+          <div class="post__excerpt">
+            ${post.excerpt.rendered}
+
+            <button class="button button--rarrow"></button>
+        </article>`;
+    });
+
+    // Listeners
+    configureLinks();
+  };
+
+  /**
+   * Fetch the published posts
+   */
+  const fetchPosts = () => {
+    axios.get(`${CONFIG.endpoint}posts`)
+      .then(onFetchPost)
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  /**
+   * Empties the DOM node, removing his chidlren
+   * @param {object} node DOM node
+   */
   const emptyNode = (node) => {
     while (node.firstChild) {
       node.removeChild(node.firstChild);
     }
   };
 
-  const loadPost = (data) => {
+  /**
+   * Loads the post content into the detail view
+   * @param {object} data Post data
+   */
+  const loadPost = (post) => {
     const detail = document.getElementById('ui-detail');
+
+    // History
+    window.history.pushState(null, post.title, `/p/${post.slug}`);
 
     // Clear the frame
     emptyNode(detail);
 
     // Append data
-    detail.innerHTML += `<p class="post__date" data-flip-key="date">${data.date}</p>`;
-    detail.innerHTML += `<h2 class="post__title" data-flip-key="title">${data.title}</h2>`;
-    detail.innerHTML += `<div class="post__detail">${data.content}</div>`;
+    detail.innerHTML += `<p class="post__date" data-flip-key="date">${parseDate(post.date)}</p>`;
+    detail.innerHTML += `<h2 class="post__title" data-flip-key="title">${post.title}</h2>`;
+    detail.innerHTML += `<div class="post__detail">${post.content}</div>`;
+
+    // Slick sliders
+    configureSliders();
   };
 
+  /**
+   * Clear the current existing flipping keys
+   */
   const clearFlipKeys = () => {
     const elements = document.querySelectorAll('[data-flip-key]');
 
@@ -69,6 +187,9 @@ const App = (() => {
     });
   };
 
+  /**
+   * Handle back button click
+   */
   const onClickBack = () => {
     transition('back');
   };
@@ -88,35 +209,39 @@ const App = (() => {
     title.dataset.flipKey = 'title';
 
     // Load post data
-    const data = fetchPost(slug);
-    loadPost(data);
-
+    fetchPost(slug, loadPost);
     transition('detail');
   };
 
+  /**
+   * Handle state change action
+   */
+  const onStateChange = () => {
+    const handler = {
+      list: () => {
+        window.history.pushState(null, 'Homepage', '/');
+      },
+    };
+
+    if (handler[currentState]) {
+      handler[currentState]();
+    }
+  };
+
+  /**
+   * Initializes the application
+   */
   const init = () => {
-    // Links
-    const posts = document.querySelectorAll('[data-post-link]');
-
-    posts.forEach((post, index) => {
-      const slug = post.dataset.postLink;
-
-      const title = post.querySelector('.post__title');
-      const arrow = post.querySelector('.button');
-
-      const handler = () => {
-        onClickPost(post, slug);
-      };
-
-      title.addEventListener('click', handler, false);
-      arrow.addEventListener('click', handler, false);
-    });
+    fetchPosts();
 
     // Back
     const controlBack = document.querySelectorAll('[data-control-back]');
     controlBack.forEach((control, index) => {
       control.addEventListener('click', onClickBack, false);
     });
+
+    // General event handling
+    window.addEventListener('statechange', onStateChange);
   };
 
   return {

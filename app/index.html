@@ -7,12 +7,16 @@
     <title>Sólo dos puntos</title>
 
     <link rel="author" href="humans.txt" />
-    <meta name="theme-color" content="#262525">
+    <meta name="theme-color" content="#9972f6">
+
+    <link rel="shortcut icon" href="/favicon.ico?v=3" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=3">
 
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet">
 
     <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="/bower_components/tiny-slider/dist/tiny-slider.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -27,43 +31,12 @@
 
         <div class="header__social">
           <a href="https://twitter.com/solodospuntos" target="_blank" class="social social--twitter">Twitter</a>
-          <a href="http://instagram.com/solodospuntos" target="_blank" class="social social--instagram">Instagram</a>
         </div>
 
         <!-- github ?-->
       </header>
 
-      <section class="ui-content">
-        <article class="post post--vast is-dark" data-post-link="vast">
-          <p class="post__date">15/04/2018</p>
-          <h2 class="post__title">Vast: The Crystal Caverns</h2>
-
-          <div class="post__excerpt">
-            <p>
-              El dragón lleva durmiendo muchos años. Durante ese tiempo, la cueva bajo la que ha descansado ha cambiado enormemente...
-            </p>
-
-            <button class="button button--rarrow"></button>
-          </div>
-        </article>
-
-        <article class="post post--helloworld is-dark" data-post-link="helloworld">
-          <p class="post__date">12/04/2018</p>
-          <h2 class="post__title">Hello world</h2>
-
-          <div class="post__excerpt">
-            <p>
-              Es necesario inaugurar el blog con algo sensible y profundo.
-            </p>
-
-            <p>
-              Porque toda historia tiene un comienzo...
-            </p>
-
-            <button class="button button--rarrow"></button>
-          </div>
-        </article>
-      </section>
+      <section id="ui-content" class="ui-content"></section>
 
       <article id="ui-detail" class="ui-detail prev-black">
         <p class="post__date" data-flip-key="date">15/04/2018</p>
@@ -77,11 +50,12 @@
       </article>
     </section>
 
-
     <script src="https://unpkg.com/flipping@1.0.0/dist/flipping.web.js"></script>
 
     <!-- build:js scripts/bundle.js -->
-    <script src="scripts/Data.js"></script>
+    <script src="/bower_components/tiny-slider/dist/tiny-slider.js"></script>
+    <script src="/bower_components/axios/dist/axios.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
     <script src="scripts/modules/App.js"></script>
     <!-- endbuild -->
 

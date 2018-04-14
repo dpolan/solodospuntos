@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body,
 html {
   width: 100%;
@@ -17,12 +13,38 @@ html {
   position: relative;
 }
 
-p {
-  font: 300 1.5rem / 1.6 $font-body;
+html {
+  font-size: 62.5%;
+}
+
+p,
+li {
+  font: 300 1.5em / 1.6 $font-body;
   color: map-get($colors, darkgray);
-  margin: 1em auto;
+  word-break: break-word;
 
   a {
     color: inherit;
   }
+
+  strong {
+    font-weight: 700;
+  }
+
+  em {
+    font-weight: inherit;
+    font-style: italic;
+  }
+
+  .strike {
+    text-decoration: line-through;
+  }
+}
+
+p {
+  margin: 1em auto;
+}
+
+li {
+  margin: 0.5em auto;
 }

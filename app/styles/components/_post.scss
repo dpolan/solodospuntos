@@ -1,29 +1,56 @@
 .post {
-  min-height: 500px;
+  display: block;
+  font-size: 1em;
   padding: 3.5em 2.5em 0;
   overflow: hidden;
+  animation: post-enter-opacity 0.5s ease-in-out both, post-enter-position 1s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
 
-  &.is-dark {
-    .post__title,
-    .post__date,
-    p {
-      color: rgba(#fff, 0.95);
-      text-shadow: 0 0 4px rgba(#212121, 0.5);
-    }
+  @keyframes post-enter-opacity {
+    0% { opacity: 0; }
   }
 
-  &--vast {
+  @keyframes post-enter-position {
+    0% { transform: translate(0, -1em); }
+  }
+
+  @media screen and (max-width: map-get($screens, sm)) {
+    min-height: 540px;
+  }
+
+  @media screen and (min-width: map-get($screens, sm)) {
+    font-size: 1.1em;
+    padding: 7em;
+  }
+
+  .post__title,
+  .post__date,
+  p {
+    text-shadow: 0 0 12px rgba(#212121, 1);
+  }
+
+  &--vast-the-crystal-caverns {
     background:
       url('../images/posts/vast/portrait.png') 50% 100% / 100% auto no-repeat,
       radial-gradient(circle at 50% 90%, #545663, darken(#545663, 15%));
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      background:
+        linear-gradient(to right, rgba(#000, 0.8), rgba(#000, 0.2)),
+        url('../images/posts/vast/portrait-wide.jpg') 50% 50% / cover no-repeat;
+    }
   }
 
-  &--helloworld {
+  &--hello-world {
     background: url('../images/posts/helloworld/portrait.jpg') 50% 50% / cover no-repeat;
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      background:
+        url('../images/posts/helloworld/portrait-wide.jpg') 50% 50% / cover no-repeat;
+    }
   }
 
   &__title {
-    font: 700 3.6rem / 1.2 $font-display;
+    font: 700 3.6em / 1.2 $font-display;
     text-transform: uppercase;
     color: map-get($colors, darkgray);
     margin: 0 auto 0.3em;
@@ -31,9 +58,23 @@
     user-select: none;
   }
 
+  &__subtitle {
+    font: 700 2.4em / 1.2 $font-display;
+    color: map-get($colors, darkgray);
+    text-transform: uppercase;
+    margin: 1.2em auto 0.3em;
+  }
+
   &__date {
-    font: 300 1.3rem / 0.8 $font-display;
+    font: 300 1.3em / 0.8 $font-display;
     color: map-get($colors, darkgray);
     margin: 0 auto 0.2em;
+  }
+
+  &__slider {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
 }
