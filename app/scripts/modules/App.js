@@ -252,6 +252,10 @@ const App = (() => {
   const init = () => {
     currentState = window.app.dataset.state;
 
+    if (currentState === 'detail') {
+      configureSliders();
+    }
+
     // Back
     const controlBack = document.querySelectorAll('[data-control-back]');
     controlBack.forEach((control, index) => {
