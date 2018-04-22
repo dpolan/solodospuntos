@@ -82,11 +82,4 @@
     color: map-get($colors, darkgray);
     margin: 0 auto 0.2em;
   }
-
-  &__slider {
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
 }
