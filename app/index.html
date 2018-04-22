@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sólo dos puntos</title>
+    <title>solodospuntos</title>
 
     <link rel="author" href="humans.txt" />
     <meta name="theme-color" content="#9972f6">
@@ -17,12 +17,12 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="/bower_components/tiny-slider/dist/tiny-slider.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
   </head>
   <body>
     <section id="app" class="app" data-state="list">
-      <header class="header">
+      <header id="header" class="header">
         <button class="button button--back" data-control-back>Atrás</button>
 
         <h1 class="header__logo">
@@ -31,6 +31,7 @@
 
         <div class="header__social">
           <a href="https://twitter.com/solodospuntos" target="_blank" class="social social--twitter">Twitter</a>
+          <a href="https://instagram.com/solodospuntos" target="_blank" class="social social--instagram">Instagram</a>
         </div>
 
         <!-- github ?-->
@@ -39,13 +40,15 @@
       <section id="ui-content" class="ui-content"></section>
 
       <article id="ui-detail" class="ui-detail prev-black">
-        <p class="post__date" data-flip-key="date">15/04/2018</p>
+        <div class="detail__post">
+          <p class="post__date" data-flip-key="date">15/04/2018</p>
 
-        <h2 class="post__title" data-flip-key="title">
-          Vast: The Crystal Caverns
-        </h2>
+          <h2 class="post__title" data-flip-key="title">
+            Vast: The Crystal Caverns
+          </h2>
 
-        <div class="post__detail">
+          <div class="post__detail">
+          </div>
         </div>
       </article>
     </section>
@@ -61,6 +64,15 @@
 
     <script>
       App.init();
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117976504-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-117976504-1');
     </script>
   </body>
 </html>

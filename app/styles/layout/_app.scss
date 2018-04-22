@@ -21,6 +21,11 @@
   &[data-state="list"] {
     .ui-content {
       display: block;
+
+      @media screen and (min-width: map-get($screens, lg)) {
+        display: flex;
+        flex-flow: row wrap;
+      }
     }
 
     .header {
@@ -38,14 +43,14 @@
 
   &[data-state="detail"] {
     .ui-detail {
-      display: block;
+      display: flex;
     }
 
     .header {
       justify-content: space-between;
 
       .button--back {
-        animation: button-back-enter 0.3s ease-in-out both;
+        animation: button-back-enter 0.3s ease-in-out 0.5s both;
 
         @keyframes button-back-enter {
           0% {

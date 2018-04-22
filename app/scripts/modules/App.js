@@ -12,8 +12,18 @@ const App = (() => {
     },
   };
 
+  const EVENTS = {
+    APP_START: 'APP_START',
+    STATE_CHANGE: 'STATE_CHANGE',
+  };
+
+  const SCREENS = {
+    SM: 540,
+    MD: 768,
+  };
+
   let posts = [];
-  let currentState = 'list';
+  let currentState;
 
   /**
    * Transition the current state through the given action
@@ -26,8 +36,7 @@ const App = (() => {
     currentState = STATES[currentState][action];
     document.getElementById('app').dataset.state = currentState;
 
-    const event = new Event('statechange');
-    window.dispatchEvent(event);
+    window.dispatchEvent(new Event(EVENTS.STATE_CHANGE));
 
     // Clear scroll between frames
     document.getElementById('ui-detail').scrollTop = 0;
@@ -167,10 +176,19 @@ const App = (() => {
     // Clear the frame
     emptyNode(detail);
 
+    detail.className = `ui-detail prev-black detail--${post.slug}`;
+
     // Append data
-    detail.innerHTML += `<p class="post__date" data-flip-key="date">${parseDate(post.date)}</p>`;
-    detail.innerHTML += `<h2 class="post__title" data-flip-key="title">${post.title}</h2>`;
-    detail.innerHTML += `<div class="post__detail">${post.content}</div>`;
+    detail.innerHTML +=
+    '<div class="detail__post">' +
+      ((window.innerWidth < SCREENS.SM)
+        ? `<p class="post__date" data-flip-key="date">${parseDate(post.date)}</p>`
+        : `<p class="post__date">${parseDate(post.date)}</p>`) +
+      ((window.innerWidth < SCREENS.SM)
+        ? `<h2 class="post__title" data-flip-key="title">${post.title}</h2>`
+        : `<h2 class="post__title">${post.title}</h2>`) +
+      `<div class="post__detail">${post.content}</div>
+    </div>`;
 
     // Slick sliders
     configureSliders();
@@ -232,7 +250,7 @@ const App = (() => {
    * Initializes the application
    */
   const init = () => {
-    fetchPosts();
+    currentState = window.app.dataset.state;
 
     // Back
     const controlBack = document.querySelectorAll('[data-control-back]');
@@ -241,7 +259,14 @@ const App = (() => {
     });
 
     // General event handling
-    window.addEventListener('statechange', onStateChange);
+    window.addEventListener(EVENTS.APP_START, fetchPosts, false)
+    window.addEventListener(EVENTS.STATE_CHANGE, onStateChange);
+
+    // Initialization
+    document.getElementById('header')
+      .addEventListener('animationend', () => {
+        window.dispatchEvent(new Event(EVENTS.APP_START));
+      }, false);
   };
 
   return {

@@ -3,15 +3,20 @@
   background: #F5F5F5;
   position: relative;
   overflow: auto;
-  padding-top: $header-height;
+  padding: $header-height-sm 0 0;
   z-index: 1;
 
   @media screen and (min-width: map-get($screens, sm)) {
-    padding: 0;
+    padding: 0 0 0 $header-height-md;
   }
 
   .post {
     height: 50%;
+
+    @media screen and (min-width: map-get($screens, lg)) {
+      flex: 1 0 50%;
+      height: 100%;
+    }
 
     &__date,
     &__title,
@@ -38,17 +43,58 @@
 
 .ui-detail {
   flex: 1 1 auto;
-  padding: ($header-height + 3.5rem) 2.5em 1em;
-  background-color: #f8f9fa;
   overflow: auto;
+  padding: ($header-height-sm + 3.5rem) 2.5em 1em;
+
+  @media screen and (min-width: map-get($screens, sm)) {
+    animation:
+      ui-detail-opacity 0.6s ease-in-out both,
+      ui-detail-translate 1s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
+  }
+
+  @keyframes ui-detail-opacity {
+    0% { opacity: 0; }
+  }
+
+  @keyframes ui-detail-translate {
+    0% { transform: translate(1em, 0); }
+  }
 
   @media screen and (min-width: map-get($screens, sm)) {
     font-size: 1.1em;
-    padding: 7em 7em 4em;
+    padding: 0;
+  }
+
+  @media screen and (min-width: map-get($screens, sm)) {
+    &.detail {
+      &--vast-the-crystal-caverns {
+        background:
+          url('../images/posts/vast/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+      }
+
+      &--hello-world {
+        background:
+          url('../images/posts/helloworld/portrait-wide.jpg') 52rem 50% / auto 100% no-repeat;
+      }
+    }
+  }
+
+  .detail__post {
+    flex: 1 1 auto;
+    max-width: 84.5rem;
+    height: 100%;
+    overflow: auto;
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      background-color: #f8f9fa;
+      padding: 7em 7em 4em ($header-height-md + 7rem);
+    }
   }
 
   &.prev-black {
-    animation: detail-enter 0.4s ease-in-out both;
+    @media screen and (max-width: map-get($screens, sm)) {
+      animation: detail-enter 0.4s ease-in-out both;
+    }
 
     @keyframes detail-enter {
       0% { background-color: #545663; }
@@ -72,13 +118,18 @@
   }
 
   .post__detail {
-    animation: post-detail-enter 0.5s ease-in-out 0.3s both;
+    @media screen and (max-width: map-get($screens, sm)) {
+      animation:
+        post-detail-opacity 0.5s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both,
+        post-detail-translate 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both;
+    }
 
-    @keyframes post-detail-enter {
-      0% {
-        transform: translateY(0.5em);
-        opacity: 0;
-      }
+    @keyframes post-detail-opacity {
+      0% { opacity: 0; }
+    }
+
+    @keyframes post-detail-translate {
+      0% { transform: translate(0, 1em); }
     }
 
     h2 {

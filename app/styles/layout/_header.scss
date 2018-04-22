@@ -3,31 +3,39 @@
   flex-flow: row nowrap;
   align-items: center;
   width: 100%;
-  height: $header-height;
+  height: $header-height-sm;
   padding: 0 0.5em;
   background: linear-gradient(45deg, #63E2FF, #B066FE);
   box-shadow: 0 0px 26px rgba(#000, 0.6);
-  animation: header-enter 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
+  animation: header-enter-top 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 2;
 
-  @keyframes header-enter {
+  @media screen and (min-width: map-get($screens, sm)) {
+    animation-name: header-enter-left;
+  }
+
+  @keyframes header-enter-top {
     0% {
       transform: translate(0, -120%);
     }
   }
 
+  @keyframes header-enter-left {
+    0% {
+      transform: translate(-120%, 0);
+    }
+  }
+
   @media screen and (min-width: map-get($screens, sm)) {
-    width: auto;
+    width: $header-height-md;
     height: 100%;
-    flex: 0 0 10rem;
     display: flex;
     flex-flow: column nowrap;
-    padding: 1.5em;
+    padding: 1.5em 0;
     box-shadow: 0 0px 26px rgba(#000, 0.4);
-    position: relative;
   }
 
   &__logo {
@@ -56,7 +64,14 @@
     }
   }
 
-  .social {
+  &__social {
     margin: 0 0.4em;
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 }
