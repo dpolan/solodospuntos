@@ -1,6 +1,6 @@
 const App = (() => {
   const CONFIG = {
-    endpoint: 'http://solodospuntos/wp-json/wp/v2/',
+    endpoint: 'https://cms.solodospuntos.com/wp-json/wp/v2/',
   };
 
   const STATES = {
