@@ -81,13 +81,17 @@
 
   .detail__post {
     flex: 1 1 auto;
-    max-width: 84.5rem;
     height: 100%;
     overflow: auto;
 
     @media screen and (min-width: map-get($screens, sm)) {
+      max-width: 84.5rem;
       background-color: #f8f9fa;
       padding: 7em 7em 4em ($header-height-md + 7rem);
+    }
+
+    @media screen and (min-width: map-get($screens, lg)) {
+      max-width: 100.0rem;
     }
   }
 
