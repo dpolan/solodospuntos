@@ -87,7 +87,7 @@ const App = (() => {
           slideBy: 'page',
           swipeAngle: false,
           speed: 400,
-          controls: false,
+          controls: true,
           nav: false,
         });
       });

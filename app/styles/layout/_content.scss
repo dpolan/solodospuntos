@@ -146,5 +146,35 @@
 
   .tns-outer {
     margin: 2em auto 3em;
+    position: relative;
+
+    button[data-controls="prev"],
+    button[data-controls="next"] {
+      text-indent: -9999px;
+      width: 3.3rem;
+      height: 3.3rem;
+      background: red;
+      border: none;
+      transform: translate(0, -50%);
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+
+      &:hover,
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button[data-controls="prev"] {
+      background: url('../images/arrow-right-white-sw.png') 50% 50% / auto 80% no-repeat;
+      transform: translate(0, -50%) rotateZ(-180deg);
+      left: 1em;
+    }
+
+    button[data-controls="next"] {
+      background: url('../images/arrow-right-white-sw.png') 50% 50% / auto 80% no-repeat;
+      right: 1em;
+    }
   }
 }
