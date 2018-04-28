@@ -169,9 +169,14 @@ const App = (() => {
    */
   const loadPost = (post) => {
     const detail = document.getElementById('ui-detail');
+    const url = `/p/${post.slug}`;
 
     // History
-    window.history.pushState(null, post.title, `/p/${post.slug}`);
+    window.history.pushState(null, post.title, url);
+
+    try {
+      gtag('config', 'GA_TRACKING_ID', { page_path: url });
+    } catch (e) {}
 
     // Clear the frame
     emptyNode(detail);
