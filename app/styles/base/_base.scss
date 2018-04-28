@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 body,
@@ -19,7 +20,7 @@ html {
 
 p,
 li {
-  font: 300 1.5em / 1.6 $font-body;
+  font: 400 1.5em / 1.6 $font-body;
   color: map-get($colors, darkgray);
   word-break: break-word;
 

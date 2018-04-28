@@ -13,12 +13,14 @@
     <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=3">
 
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="/bower_components/tiny-slider/dist/tiny-slider.css">
     <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
   </head>
   <body>
     <section id="app" class="app" data-state="list">
@@ -73,6 +75,28 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-117976504-1');
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+      window.addEventListener('load', function () {
+      window.cookieconsent.initialise({
+        palette: {
+          popup: {
+            background: '#edeff5',
+            text: '#838391'
+          },
+          button: {
+            background: '#4b81e8',
+          }
+        },
+        position: 'bottom-right',
+        content: {
+          message: 'Este sitio web utiliza cookies para poder ofrecerte una mejor experiencia.',
+          dismiss: 'Entendido',
+          link: 'Saber más',
+        }
+      })});
     </script>
   </body>
 </html>
