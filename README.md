@@ -5,7 +5,6 @@ Static web application for the solodospuntos.com site
 
 - [x] Cookie alert
 - [x] Slider arrows
-
-- [] Improve desktop navigation with multiple posts
-- [] Add smart image preloading
-- [] Keep posting like a mad scientist
+- [ ] Improve desktop navigation with multiple posts
+- [ ] Add smart image preloading
+- [ ] Keep posting like a mad scientist
