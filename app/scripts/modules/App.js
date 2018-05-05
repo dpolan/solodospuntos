@@ -24,6 +24,7 @@ const App = (() => {
 
   let posts = [];
   let currentState;
+  const defaultSeoTitle = 'solodospuntos | Juegos de mesa y Desarrollo web'; // TODO: Get it from WP
 
   /**
    * Transition the current state through the given action
@@ -70,6 +71,7 @@ const App = (() => {
       slug: post.slug,
       date: post.date,
       title: post.title.rendered,
+      seoTitle: post.yoast_meta.yoast_wpseo_title,
       content: post.content.rendered,
     });
   };
@@ -174,6 +176,9 @@ const App = (() => {
     // History
     window.history.pushState(null, post.title, url);
 
+    // Title
+    document.title = post.seoTitle;
+
     try {
       gtag('config', 'GA_TRACKING_ID', { page_path: url });
     } catch (e) {}
@@ -243,6 +248,7 @@ const App = (() => {
     const handler = {
       list: () => {
         window.history.pushState(null, 'Homepage', '/');
+        document.title = defaultSeoTitle;
       },
     };
 
