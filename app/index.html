@@ -55,19 +55,17 @@
       </article>
     </section>
 
-    <script src="https://unpkg.com/flipping@1.0.0/dist/flipping.web.js"></script>
-
-    <!-- build:js scripts/bundle.js -->
+    <!-- build:js scripts/bundle.js async -->
     <script src="/bower_components/tiny-slider/dist/tiny-slider.js"></script>
     <script src="/bower_components/axios/dist/axios.min.js"></script>
     <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="scripts/vendor/flipping.js"></script>
+    <script src="scripts/vendor/flipping.web.js"></script>
     <script src="scripts/modules/App.js"></script>
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
-    <script>
-      App.init();
-    </script>
-
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117976504-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -77,26 +75,29 @@
       gtag('config', 'UA-117976504-1');
     </script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <!-- Cookie consent -->
     <script>
-      window.addEventListener('load', function () {
-      window.cookieconsent.initialise({
-        palette: {
-          popup: {
-            background: '#edeff5',
-            text: '#838391'
+      window.cookieconsentInit = function() {
+        window.cookieconsent.initialise({
+          palette: {
+            popup: {
+              background: '#edeff5',
+              text: '#838391'
+            },
+            button: {
+              background: '#4b81e8',
+            }
           },
-          button: {
-            background: '#4b81e8',
+          position: 'bottom-right',
+          content: {
+            message: 'Este sitio web utiliza cookies para poder ofrecerte una mejor experiencia.',
+            dismiss: 'Entendido',
+            link: 'Saber más',
           }
-        },
-        position: 'bottom-right',
-        content: {
-          message: 'Este sitio web utiliza cookies para poder ofrecerte una mejor experiencia.',
-          dismiss: 'Entendido',
-          link: 'Saber más',
-        }
-      })});
+        })
+      };
     </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js" async onload="cookieconsentInit()"></script>
   </body>
 </html>

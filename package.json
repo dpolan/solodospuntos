@@ -44,5 +44,8 @@
         "single"
       ]
     }
+  },
+  "dependencies": {
+    "flipping": "^1.0.0"
   }
 }
