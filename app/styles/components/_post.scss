@@ -37,12 +37,12 @@
       background:
         linear-gradient(to right, rgba(#000, 0.6), rgba(#000, 0)),
         url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 50% 50% / cover no-repeat;
-    }
+      }
 
-    @media screen and (min-width: map-get($screens, lg)) {
-      background:
-        #9ddafe
-        url('../images/posts/epic-juego-cartas/portrait.jpg') 50% 100% / 100% auto no-repeat;
+      @media screen and (min-width: map-get($screens, lg)) {
+        background:
+        linear-gradient(to bottom, rgba(#000, 0.6), rgba(#000, 0)),
+        url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }
 
