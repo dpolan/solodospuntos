@@ -67,6 +67,11 @@
 
   @media screen and (min-width: map-get($screens, sm)) {
     &.detail {
+      &--epic-juego-cartas {
+        background:
+          url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+      }
+
       &--heaven-and-ale {
         background:
           url('../images/posts/heaven-and-ale/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
