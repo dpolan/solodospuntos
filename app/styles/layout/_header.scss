@@ -6,7 +6,7 @@
   height: $header-height-sm;
   padding: 0 0.5em;
   background: linear-gradient(45deg, #63E2FF, #B066FE);
-  box-shadow: 0 0px 26px rgba(#000, 0.6);
+  box-shadow: 0 0 22px #000;
   animation: header-enter-top 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both;
   position: fixed;
   left: 0;
@@ -35,7 +35,6 @@
     display: flex;
     flex-flow: column nowrap;
     padding: 1.5em 0;
-    box-shadow: 0 0px 26px rgba(#000, 0.4);
   }
 
   &__logo {

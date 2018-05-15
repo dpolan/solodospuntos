@@ -1,0 +1,7 @@
+@function post-text-shadow($direction) {
+  @if $direction == 'vertical' {
+    @return linear-gradient(to bottom, rgba(#121212, 0.8) 30%, rgba(#121212, 0) 70%);
+  } @else {
+    @return linear-gradient(to right, rgba(#121212, 0.8) 30%, rgba(#121212, 0.2));
+  }
+}

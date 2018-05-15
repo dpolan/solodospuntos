@@ -3,15 +3,6 @@
   font-size: 1em;
   padding: 3.5em 2.5em 0;
   overflow: hidden;
-  animation: post-enter-opacity 0.5s ease-in-out both, post-enter-position 1s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
-
-  @keyframes post-enter-opacity {
-    0% { opacity: 0; }
-  }
-
-  @keyframes post-enter-position {
-    0% { transform: translate(0, -1em); }
-  }
 
   @media screen and (max-width: map-get($screens, sm)) {
     min-height: 450px;
@@ -25,23 +16,27 @@
   .post__title,
   .post__date,
   p {
-    text-shadow: 0 0 12px rgba(#212121, 1);
+    text-shadow: 0 0 10px rgba(#121212, 1);
   }
 
   &--el-curso-de-la-historia {
+    @media screen and (max-width: map-get($screens, sm)) {
+      min-height: 540px;
+    }
+
     background:
       url('../images/posts/el-curso-de-la-historia/portrait.jpg') 50% 100% / 100% auto no-repeat,
       linear-gradient(to bottom, #e97938, #efd799 30%);
 
     @media screen and (min-width: map-get($screens, sm)) {
       background:
-        linear-gradient(to right, rgba(#000, 0.6), rgba(#000, 0)),
+        post-text-shadow('horizontal'),
         url('../images/posts/el-curso-de-la-historia/portrait-wide.jpg') 50% 50% / cover no-repeat;
       }
 
     @media screen and (min-width: map-get($screens, lg)) {
       background:
-        linear-gradient(to bottom, rgba(#000, 0.6), rgba(#000, 0)),
+        post-text-shadow('vertical'),
         url('../images/posts/el-curso-de-la-historia/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }
@@ -53,13 +48,13 @@
 
     @media screen and (min-width: map-get($screens, sm)) {
       background:
-        linear-gradient(to right, rgba(#000, 0.6), rgba(#000, 0)),
+        post-text-shadow('horizontal'),
         url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 50% 50% / cover no-repeat;
       }
 
     @media screen and (min-width: map-get($screens, lg)) {
       background:
-        linear-gradient(to bottom, rgba(#000, 0.6), rgba(#000, 0)),
+        post-text-shadow('vertical'),
         url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }
@@ -71,13 +66,13 @@
 
     @media screen and (min-width: map-get($screens, sm)) {
       background:
-        linear-gradient(to right, rgba(#000, 0.85), rgba(#000, 0.3)),
+        post-text-shadow('horizontal'),
         url('../images/posts/heaven-and-ale/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
 
     @media screen and (min-width: map-get($screens, lg)) {
       background:
-        linear-gradient(to bottom, rgba(#000, 0.7), rgba(#000, 0.2)),
+        post-text-shadow('vertical'),
         url('../images/posts/heaven-and-ale/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }
@@ -93,13 +88,13 @@
 
     @media screen and (min-width: map-get($screens, sm)) {
       background:
-        linear-gradient(to right, rgba(#000, 0.7), rgba(#000, 0.2)),
+        post-text-shadow('horizontal'),
         url('../images/posts/vast/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
 
     @media screen and (min-width: map-get($screens, lg)) {
       background:
-        linear-gradient(to bottom, rgba(#000, 0.7), rgba(#000, 0.2)),
+        post-text-shadow('vertical'),
         url('../images/posts/vast/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }
@@ -109,12 +104,13 @@
 
     @media screen and (min-width: map-get($screens, sm)) {
       background:
+        post-text-shadow('horizontal'),
         url('../images/posts/helloworld/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
 
     @media screen and (min-width: map-get($screens, lg)) {
       background:
-      linear-gradient(to bottom, rgba(#000, 0.6), rgba(#000, 0)),
+        post-text-shadow('vertical'),
         url('../images/posts/helloworld/portrait-wide.jpg') 50% 50% / cover no-repeat;
     }
   }

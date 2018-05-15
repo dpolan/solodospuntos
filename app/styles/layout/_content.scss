@@ -8,6 +8,11 @@
 
   @media screen and (min-width: map-get($screens, sm)) {
     padding: 0 0 0 $header-height-md;
+    animation: content-enter 0.6s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both;
+  }
+
+  @keyframes content-enter {
+    0% { opacity: 0; }
   }
 
   .post {
@@ -44,12 +49,12 @@
 .ui-detail {
   flex: 1 1 auto;
   overflow: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: ($header-height-sm + 3.5rem) 2.5em 1em;
 
   @media screen and (min-width: map-get($screens, sm)) {
-    animation:
-      ui-detail-opacity 0.6s ease-in-out both,
-      ui-detail-translate 1s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
+    animation: ui-detail-translate 1s cubic-bezier(0.28, 0.52, 0.42, 0.94) both;
   }
 
   @keyframes ui-detail-opacity {
@@ -57,39 +62,39 @@
   }
 
   @keyframes ui-detail-translate {
-    0% { transform: translate(1em, 0); }
+    0% { transform: translate(-1.5em, 0); }
   }
 
   @media screen and (min-width: map-get($screens, sm)) {
     font-size: 1.1em;
+    background-position: 84.5rem 50%;
     padding: 0;
+  }
+
+  @media screen and (min-width: map-get($screens, lg)) {
+    background-position: 100rem 50%;
   }
 
   @media screen and (min-width: map-get($screens, sm)) {
     &.detail {
       &--el-curso-de-la-historia {
-        background:
-          url('../images/posts/el-curso-de-la-historia/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+        background-image: url('../images/posts/el-curso-de-la-historia/portrait-wide.jpg');
       }
 
       &--epic-juego-cartas {
-        background:
-          url('../images/posts/epic-juego-cartas/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+        background-image: url('../images/posts/epic-juego-cartas/portrait-wide.jpg');
       }
 
       &--heaven-and-ale {
-        background:
-          url('../images/posts/heaven-and-ale/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+        background-image: url('../images/posts/heaven-and-ale/portrait-wide.jpg');
       }
 
       &--vast-the-crystal-caverns {
-        background:
-          url('../images/posts/vast/portrait-wide.jpg') 44.5rem 50% / auto 100% no-repeat;
+        background-image: url('../images/posts/vast/portrait-wide.jpg');
       }
 
       &--hello-world {
-        background:
-          url('../images/posts/helloworld/portrait-wide.jpg') 52rem 50% / auto 100% no-repeat;
+        background-image: url('../images/posts/helloworld/portrait-wide.jpg');
       }
     }
   }
@@ -104,6 +109,7 @@
     @media screen and (min-width: map-get($screens, sm)) {
       max-width: 84.5rem;
       background-color: #f8f9fa;
+      box-shadow: 0 0 22px #000;
       padding: 7em 7em 4em ($header-height-md + 7rem);
     }
 
@@ -139,18 +145,10 @@
   }
 
   .post__detail {
-    @media screen and (max-width: map-get($screens, sm)) {
-      animation:
-        post-detail-opacity 0.5s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both,
-        post-detail-translate 0.8s cubic-bezier(0.28, 0.52, 0.42, 0.94) 0.3s both;
-    }
+    animation: post-detail-enter 0.8s ease-in-out both;
 
-    @keyframes post-detail-opacity {
+    @keyframes post-detail-enter {
       0% { opacity: 0; }
-    }
-
-    @keyframes post-detail-translate {
-      0% { transform: translate(0, 1em); }
     }
 
     h2 {
