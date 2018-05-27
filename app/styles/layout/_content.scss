@@ -77,6 +77,10 @@
 
   @media screen and (min-width: map-get($screens, sm)) {
     &.detail {
+      &--el-valle-de-los-mercaderes {
+        background-image: url('../images/posts/el-valle-de-los-mercaderes/portrait-wide.jpg');
+      }
+
       &--el-curso-de-la-historia {
         background-image: url('../images/posts/el-curso-de-la-historia/portrait-wide.jpg');
       }

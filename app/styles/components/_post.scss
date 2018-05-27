@@ -19,6 +19,28 @@
     text-shadow: 0 0 10px rgba(#121212, 1);
   }
 
+  &--el-valle-de-los-mercaderes {
+    @media screen and (max-width: map-get($screens, sm)) {
+      min-height: 540px;
+    }
+
+    background:
+      url('../images/posts/el-valle-de-los-mercaderes/portrait.jpg') 50% 100% / 100% auto no-repeat,
+      linear-gradient(to bottom, #e17b10, #e4ae2c 30%);
+
+    @media screen and (min-width: map-get($screens, sm)) {
+      background:
+        post-text-shadow('horizontal'),
+        url('../images/posts/el-valle-de-los-mercaderes/portrait-wide.jpg') 50% 50% / cover no-repeat;
+      }
+
+    @media screen and (min-width: map-get($screens, lg)) {
+      background:
+        post-text-shadow('vertical'),
+        url('../images/posts/el-valle-de-los-mercaderes/portrait-wide.jpg') 50% 50% / cover no-repeat;
+    }
+  }
+
   &--el-curso-de-la-historia {
     @media screen and (max-width: map-get($screens, sm)) {
       min-height: 540px;
