@@ -1,4 +1,6 @@
 const App = (() => {
+  const POST_PER_PAGE = 4;
+
   const CONFIG = {
     endpoint: 'https://cms.solodospuntos.com/wp-json/wp/v2/',
   };
@@ -31,18 +33,20 @@ const App = (() => {
    * @param {object} action Action to apply
    */
   const transition = (action) => {
-    const flipping = new Flipping();
-    flipping.read();
+    if (currentState){
+      const flipping = new Flipping();
+      flipping.read();
 
-    currentState = STATES[currentState][action];
-    document.getElementById('app').dataset.state = currentState;
+      currentState = STATES[currentState][action];
 
-    window.dispatchEvent(new Event(EVENTS.STATE_CHANGE));
+      document.getElementById('app').dataset.state = currentState;
+      window.dispatchEvent(new Event(EVENTS.STATE_CHANGE));
 
-    // Clear scroll between frames
-    document.getElementById('ui-detail').scrollTop = 0;
+      // Clear scroll between frames
+      document.getElementById('ui-detail').scrollTop = 0;
 
-    flipping.flip();
+      flipping.flip();
+    }
   };
 
   const parseDate = date => moment(date).format('DD/MM/YYYY');
@@ -108,7 +112,7 @@ const App = (() => {
       const arrow = post.querySelector('.button');
 
       const handler = () => {
-        onClickPost(post, slug);
+        onClickPost(slug);
       };
 
       title.addEventListener('click', handler, false);
@@ -224,10 +228,9 @@ const App = (() => {
 
   /**
    * Handle post click action
-   * @param {object} element DOM element
    * @param {string} slug    Post string identifier
    */
-  const onClickPost = (element, slug) => {
+  const onClickPost = (slug) => {
     clearFlipKeys();
 
     const date = document.querySelector(`[data-post-link="${slug}"] .post__date`);
@@ -258,6 +261,22 @@ const App = (() => {
   };
 
   /**
+   * Handle window history change state
+   * @param {object} event window change state
+   */
+  const onWindowPopState = (event) => {
+    const { href } = document.location;
+    const regex = /\/p\/(.+)/g;
+
+    if (regex.test(href)) {
+      const slug = regex.exec(href);
+      console.log(slug);
+    } else {
+      transition('back');
+    }
+  };
+
+  /**
    * Initializes the application
    */
   const init = () => {
@@ -266,6 +285,8 @@ const App = (() => {
     if (currentState === 'detail') {
       configureSliders();
     }
+
+    window.onpopstate = onWindowPopState;
 
     // Back
     const controlBack = document.querySelectorAll('[data-control-back]');
